@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import { Link } from "@tanstack/react-router";
 import { ArrowLeft } from "lucide-react";
 
-import { Logo } from "@/components/logo";
+import { Logo } from "@/components/Logo";
 import { Reveal } from "@/components/motion/reveal";
 
 type AuthFormShellProps = {

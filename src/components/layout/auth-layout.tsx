@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import { Check, Sparkles } from "lucide-react";
 
-import { Logo } from "@/components/logo";
+import { Logo } from "@/components/Logo";
 import { Reveal } from "@/components/motion/reveal";
 
 type AuthLayoutProps = {

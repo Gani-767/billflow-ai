@@ -13,7 +13,7 @@ import {
 } from "lucide-react";
 
 import { CreateInvoiceDialog } from "@/components/invoices/create-invoice-dialog";
-import { Logo } from "@/components/logo";
+import { Logo } from "@/components/Logo";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
