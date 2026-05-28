@@ -1,4 +1,4 @@
-import { supabase } from "@/lib/supabase";
+import { getSupabaseClient } from "@/lib/supabase";
 import type { CreateInvoiceInput, Invoice, InvoiceStatus } from "@/types/invoice";
 
 function mapRow(row: Record<string, unknown>): Invoice {
@@ -20,7 +20,7 @@ function mapRow(row: Record<string, unknown>): Invoice {
 }
 
 export async function fetchInvoices(userId: string): Promise<Invoice[]> {
-  const { data, error } = await supabase
+  const { data, error } = await getSupabaseClient()
     .from("invoices")
     .select("*")
     .eq("user_id", userId)
@@ -37,7 +37,7 @@ export async function fetchInvoices(userId: string): Promise<Invoice[]> {
 }
 
 async function nextInvoiceNumber(userId: string): Promise<string> {
-  const { count, error } = await supabase
+  const { count, error } = await getSupabaseClient()
     .from("invoices")
     .select("*", { count: "exact", head: true })
     .eq("user_id", userId);
@@ -50,7 +50,7 @@ async function nextInvoiceNumber(userId: string): Promise<string> {
 export async function createInvoice(userId: string, input: CreateInvoiceInput): Promise<Invoice> {
   const invoice_number = await nextInvoiceNumber(userId);
 
-  const { data, error } = await supabase
+  const { data, error } = await getSupabaseClient()
     .from("invoices")
     .insert({
       user_id: userId,
@@ -70,7 +70,7 @@ export async function createInvoice(userId: string, input: CreateInvoiceInput): 
 }
 
 export async function updateInvoiceStatus(id: string, status: InvoiceStatus): Promise<Invoice> {
-  const { data, error } = await supabase
+  const { data, error } = await getSupabaseClient()
     .from("invoices")
     .update({ status })
     .eq("id", id)
@@ -82,7 +82,7 @@ export async function updateInvoiceStatus(id: string, status: InvoiceStatus): Pr
 }
 
 export async function deleteInvoice(id: string): Promise<void> {
-  const { error } = await supabase.from("invoices").delete().eq("id", id);
+  const { error } = await getSupabaseClient().from("invoices").delete().eq("id", id);
   if (error) throw new Error(error.message);
 }
 

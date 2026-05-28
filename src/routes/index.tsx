@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { Link, createFileRoute } from "@tanstack/react-router";
 import {
   ArrowRight,
   Bot,
@@ -12,7 +12,6 @@ import {
   Check,
 } from "lucide-react";
 import { ChatMockup } from "@/components/ChatMockup";
-
 export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
@@ -71,18 +70,18 @@ function Nav() {
           </a>
         </nav>
         <div className="flex items-center gap-2">
-          <a
-            href="#"
+          <Link
+            to="/login"
             className="hidden sm:inline text-sm font-medium text-foreground/80 hover:text-foreground px-3 py-2"
           >
             Sign in
-          </a>
-          <a
-            href="#cta"
+          </Link>
+          <Link
+            to="/signup"
             className="inline-flex items-center gap-1.5 rounded-full bg-foreground px-4 py-2 text-sm font-medium text-background hover:opacity-90 transition"
           >
             Get started <ArrowRight className="h-3.5 w-3.5" />
-          </a>
+          </Link>
         </div>
       </div>
     </header>

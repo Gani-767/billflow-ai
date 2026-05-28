@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 import type { Session, User } from "@supabase/supabase-js";
 
-import { supabase } from "@/lib/supabase";
+import { getSupabaseClient, isSupabaseConfigured } from "@/lib/supabase";
 
 type AuthContextValue = {
   session: Session | null;
@@ -23,14 +23,21 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session: currentSession } }) => {
+    if (!isSupabaseConfigured) {
+      setLoading(false);
+      return;
+    }
+
+    const client = getSupabaseClient();
+
+    client.auth.getSession().then(({ data: { session: currentSession } }) => {
       setSession(currentSession);
       setLoading(false);
     });
 
     const {
       data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, nextSession) => {
+    } = client.auth.onAuthStateChange((_event, nextSession) => {
       setSession(nextSession);
       setLoading(false);
     });
@@ -43,11 +50,27 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     user: session?.user ?? null,
     loading,
     signIn: async (email, password) => {
-      const { error } = await supabase.auth.signInWithPassword({ email, password });
+      if (!isSupabaseConfigured) {
+        return {
+          error: new Error(
+            "Login is not available yet. Please configure VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY.",
+          ),
+        };
+      }
+
+      const { error } = await getSupabaseClient().auth.signInWithPassword({ email, password });
       return { error: error ? new Error(error.message) : null };
     },
     signUp: async (email, password, metadata) => {
-      const { error } = await supabase.auth.signUp({
+      if (!isSupabaseConfigured) {
+        return {
+          error: new Error(
+            "Signup is not available yet. Please configure VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY.",
+          ),
+        };
+      }
+
+      const { error } = await getSupabaseClient().auth.signUp({
         email,
         password,
         options: metadata?.full_name ? { data: { full_name: metadata.full_name } } : undefined,
@@ -55,7 +78,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       return { error: error ? new Error(error.message) : null };
     },
     signOut: async () => {
-      await supabase.auth.signOut();
+      if (!isSupabaseConfigured) return;
+      await getSupabaseClient().auth.signOut();
     },
   };
 
