@@ -13,7 +13,7 @@ import {
 } from "lucide-react";
 import { ChatMockup } from "@/components/ChatMockup";
 import { MarketingNav } from "@/components/layout/marketing-nav";
-import { Logo } from "@/components/logo";
+import { Logo } from "@/components/Logo";
 import { Reveal } from "@/components/motion/reveal";
 import { SectionHeader } from "@/components/motion/section-header";
 import { Button } from "@/components/ui/button";
@@ -31,7 +31,7 @@ export const Route = createFileRoute("/")({
       { property: "og:title", content: "BillFlow AI — Invoices on WhatsApp" },
       {
         property: "og:description",
-        content: "Type ‘Invoice Ravi ₹5000 logo’ — done. Invoices, PDFs and reminders, automated.",
+        content: "Type ‘Invoice Ravi ₹5000 Logo’ — done. Invoices, PDFs and reminders, automated.",
       },
     ],
   }),
@@ -83,7 +83,7 @@ function Hero() {
           >
             Message{" "}
             <span className="inline-block max-w-full break-words rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs text-foreground sm:text-sm">
-              Invoice Ravi ₹5000 logo
+              Invoice Ravi ₹5000 Logo
             </span>{" "}
             — BillFlow creates the PDF, sends it to your client, and chases payment automatically.
           </p>
@@ -177,7 +177,7 @@ function Features() {
     {
       icon: FileText,
       title: "Branded PDFs",
-      body: "GST-ready invoices with your logo, sent back in chat.",
+      body: "GST-ready invoices with your Logo, sent back in chat.",
       span: "",
     },
     {
