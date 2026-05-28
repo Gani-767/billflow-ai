@@ -1,22 +1,17 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import {
   ArrowRight,
   Bot,
   FileText,
   Bell,
   Shield,
+  Sparkles,
   MessageCircle,
   Zap,
   BarChart3,
   Check,
-  Star,
 } from "lucide-react";
 import { ChatMockup } from "@/components/ChatMockup";
-import { MarketingNav } from "@/components/layout/marketing-nav";
-import { Logo } from "@/components/Logo";
-import { Reveal } from "@/components/motion/reveal";
-import { SectionHeader } from "@/components/motion/section-header";
-import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -39,15 +34,12 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   return (
-    <div className="relative min-h-screen min-h-[100dvh] overflow-x-hidden bg-background text-foreground">
-      <div className="saas-grid pointer-events-none fixed inset-0 opacity-40 sm:opacity-50" />
-      <div className="pointer-events-none fixed inset-0 bg-mesh" />
-      <MarketingNav />
+    <div className="min-h-screen bg-background text-foreground">
+      <Nav />
       <Hero />
       <LogosStrip />
       <Features />
       <HowItWorks />
-      <Testimonials />
       <Pricing />
       <CTA />
       <Footer />
@@ -55,86 +47,97 @@ function Index() {
   );
 }
 
+function Nav() {
+  return (
+    <header className="sticky top-0 z-40 border-b border-border/60 bg-background/80 backdrop-blur">
+      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5">
+        <a href="#" className="flex items-center gap-2">
+          <div className="grid h-8 w-8 place-items-center rounded-lg bg-gradient-primary text-primary-foreground shadow-soft">
+            <Sparkles className="h-4 w-4" />
+          </div>
+          <span className="font-display text-lg font-bold tracking-tight">
+            BillFlow<span className="text-primary">.ai</span>
+          </span>
+        </a>
+        <nav className="hidden md:flex items-center gap-7 text-sm text-muted-foreground">
+          <a href="#features" className="hover:text-foreground transition">
+            Features
+          </a>
+          <a href="#how" className="hover:text-foreground transition">
+            How it works
+          </a>
+          <a href="#pricing" className="hover:text-foreground transition">
+            Pricing
+          </a>
+        </nav>
+        <div className="flex items-center gap-2">
+          <a
+            href="#"
+            className="hidden sm:inline text-sm font-medium text-foreground/80 hover:text-foreground px-3 py-2"
+          >
+            Sign in
+          </a>
+          <a
+            href="#cta"
+            className="inline-flex items-center gap-1.5 rounded-full bg-foreground px-4 py-2 text-sm font-medium text-background hover:opacity-90 transition"
+          >
+            Get started <ArrowRight className="h-3.5 w-3.5" />
+          </a>
+        </div>
+      </div>
+    </header>
+  );
+}
+
 function Hero() {
   return (
-    <section className="relative bg-hero">
-      <div className="mx-auto grid max-w-6xl gap-12 px-4 pb-20 pt-12 sm:gap-16 sm:px-5 sm:pb-24 sm:pt-16 lg:grid-cols-2 lg:items-center lg:gap-20 lg:pb-32 lg:pt-28">
-        <div className="order-2 flex flex-col justify-center text-center lg:order-1 lg:text-left">
-          <div
-            className="hero-enter mx-auto inline-flex w-fit max-w-full items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-3 py-1.5 text-xs font-medium text-primary lg:mx-0"
-            style={{ "--hero-delay": "0ms" } as React.CSSProperties}
-          >
-            <span className="relative flex h-2 w-2 shrink-0">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-40" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
-            </span>
-            <span className="truncate">AI invoice parsing · Now in beta</span>
+    <section className="bg-hero">
+      <div className="mx-auto grid max-w-6xl gap-12 px-5 py-20 lg:grid-cols-2 lg:py-28">
+        <div className="flex flex-col justify-center">
+          <div className="inline-flex w-fit items-center gap-2 rounded-full border border-border bg-card/70 px-3 py-1.5 text-xs font-medium text-foreground shadow-soft">
+            <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
+            New · GPT-powered invoice parsing
           </div>
-          <h1
-            className="hero-enter mt-6 font-display text-[1.75rem] font-bold leading-[1.1] tracking-tight sm:text-4xl md:text-5xl lg:mt-8 lg:text-6xl"
-            style={{ "--hero-delay": "80ms" } as React.CSSProperties}
-          >
-            The billing OS for{" "}
-            <span className="text-gradient">WhatsApp-first</span> businesses.
+          <h1 className="mt-5 font-display text-5xl font-bold leading-[1.05] tracking-tight sm:text-6xl">
+            Invoices on <span className="text-gradient">WhatsApp.</span>
+            <br />
+            Done in 10 seconds.
           </h1>
-          <p
-            className="hero-enter mx-auto mt-5 max-w-lg text-base leading-relaxed text-muted-foreground sm:text-lg lg:mx-0 lg:mt-6"
-            style={{ "--hero-delay": "160ms" } as React.CSSProperties}
-          >
-            Message{" "}
-            <span className="inline-block max-w-full break-words rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs text-foreground sm:text-sm">
-              Invoice Ravi ₹ogo
-            </span>{" "}
-            — BillFlow creates the PDF, sends it to your client, and chases payment automatically.
+          <p className="mt-5 max-w-lg text-lg text-muted-foreground">
+            Send a quick message like{" "}
+            <em className="text-foreground not-italic">“Invoice Ravi ₹5000 logo design”</em> —
+            BillFlow AI creates the invoice, generates a PDF, sends it to your client, and reminds
+            them to pay.
           </p>
-          <div
-            className="hero-enter mt-8 flex flex-col gap-3 sm:mt-10 sm:flex-row sm:flex-wrap sm:justify-center lg:justify-start"
-            style={{ "--hero-delay": "240ms" } as React.CSSProperties}
-          >
-            <Link to="/signup" className="w-full sm:w-auto">
-              <Button
-                size="lg"
-                className="h-12 w-full rounded-lg gap-2 shadow-glow transition-transform duration-300 hover:scale-[1.02] active:scale-[0.98] sm:h-11 sm:w-auto sm:px-6"
-              >
-                Start free trial <ArrowRight className="h-4 w-4" />
-              </Button>
-            </Link>
-            <a href="#how" className="w-full sm:w-auto">
-              <Button
-                variant="outline"
-                size="lg"
-                className="h-12 w-full rounded-lg gap-2 bg-card/80 transition-transform duration-300 hover:scale-[1.02] active:scale-[0.98] sm:h-11 sm:w-auto"
-              >
-                <MessageCircle className="h-4 w-4 text-primary" /> Watch demo
-              </Button>
+          <div className="mt-8 flex flex-wrap items-center gap-3">
+            <a
+              href="#cta"
+              className="inline-flex items-center gap-2 rounded-full bg-gradient-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-glow hover:opacity-95 transition"
+            >
+              Start free — no card needed <ArrowRight className="h-4 w-4" />
+            </a>
+            <a
+              href="#how"
+              className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-5 py-3 text-sm font-medium text-foreground hover:bg-muted transition"
+            >
+              <MessageCircle className="h-4 w-4 text-primary" /> See it in action
             </a>
           </div>
-          <div
-            className="hero-enter mt-10 grid grid-cols-3 gap-6 border-t border-border/60 pt-10 sm:mt-12 sm:gap-8"
-            style={{ "--hero-delay": "320ms" } as React.CSSProperties}
-          >
-            {[
-              { stat: "10s", label: "Avg. invoice time" },
-              { stat: "2.4k+", label: "Businesses" },
-              { stat: "98%", label: "Parse accuracy" },
-            ].map((s) => (
-              <div key={s.label} className="min-w-0">
-                <p className="font-display text-xl font-bold tracking-tight sm:text-2xl">{s.stat}</p>
-                <p className="mt-1 text-[10px] leading-snug text-muted-foreground sm:text-xs">
-                  {s.label}
-                </p>
-              </div>
-            ))}
+          <div className="mt-8 flex items-center gap-6 text-xs text-muted-foreground">
+            <div className="flex items-center gap-1.5">
+              <Check className="h-3.5 w-3.5 text-primary" /> Free for 14 days
+            </div>
+            <div className="flex items-center gap-1.5">
+              <Check className="h-3.5 w-3.5 text-primary" /> GST-ready
+            </div>
+            <div className="flex items-center gap-1.5">
+              <Check className="h-3.5 w-3.5 text-primary" /> Cancel anytime
+            </div>
           </div>
         </div>
-        <div className="order-1 flex justify-center lg:order-2 lg:justify-end">
-          <div
-            className="hero-enter relative w-full max-w-[min(100%,340px)] sm:max-w-[360px] float-soft"
-            style={{ "--hero-delay": "200ms" } as React.CSSProperties}
-          >
-            <div className="glow-pulse absolute inset-0 -z-10 rounded-full bg-primary/15 blur-3xl" />
-            <ChatMockup />
-          </div>
+
+        <div className="flex items-center justify-center">
+          <ChatMockup />
         </div>
       </div>
     </section>
@@ -144,25 +147,23 @@ function Hero() {
 function LogosStrip() {
   const items = ["Local Studio", "Chai & Co.", "PixelKart", "Repair Hub", "Lensman", "Verde Cafe"];
   return (
-    <Reveal as="section">
-      <div className="border-y border-border/60 bg-card/40 backdrop-blur-sm">
-        <div className="mx-auto max-w-6xl px-4 py-8 sm:px-5 sm:py-10">
-          <p className="text-center text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground sm:text-xs">
-            Trusted by teams across India
-          </p>
-          <div className="mt-6 -mx-4 flex gap-8 overflow-x-auto px-4 pb-1 scrollbar-none sm:mx-0 sm:flex-wrap sm:justify-center sm:gap-x-12 sm:gap-y-5 sm:overflow-visible sm:px-0 sm:pb-0">
-            {items.map((n) => (
-              <span
-                key={n}
-                className="shrink-0 font-display text-sm font-semibold text-foreground/35 whitespace-nowrap transition-colors duration-300 hover:text-foreground/60"
-              >
-                {n}
-              </span>
-            ))}
-          </div>
+    <div className="border-y border-border/60 bg-card/50">
+      <div className="mx-auto max-w-6xl px-5 py-6">
+        <p className="text-center text-xs uppercase tracking-widest text-muted-foreground">
+          Trusted by 2,400+ small businesses across India
+        </p>
+        <div className="mt-4 grid grid-cols-3 gap-6 md:grid-cols-6 opacity-70">
+          {items.map((n) => (
+            <div
+              key={n}
+              className="text-center font-display text-sm font-semibold text-foreground/70"
+            >
+              {n}
+            </div>
+          ))}
         </div>
       </div>
-    </Reveal>
+    </div>
   );
 }
 
@@ -170,64 +171,60 @@ function Features() {
   const items = [
     {
       icon: Bot,
-      title: "Natural language AI",
-      body: "English or Hinglish — client, amount, and line items extracted instantly.",
-      span: "lg:col-span-2",
+      title: "AI understands you",
+      body: "Type naturally in English or Hinglish. BillFlow extracts client, amount, and service automatically.",
     },
     {
       icon: FileText,
-      title: "Branded PDFs",
-      body: "GST-ready invoices with your Logo, sent back in chat.",
-      span: "",
+      title: "Beautiful PDFs",
+      body: "Branded, GST-ready invoice PDFs generated in seconds — sent back to your chat.",
     },
     {
       icon: Bell,
-      title: "Smart reminders",
-      body: "Polite nudges on day 3, 7, and 14. You stop chasing.",
-      span: "",
+      title: "Auto reminders",
+      body: "Polite payment nudges fire on day 3, 7 and 14. You stop chasing, clients still pay.",
     },
     {
       icon: BarChart3,
-      title: "Revenue dashboard",
-      body: "Paid, pending, and overdue — filter by client or month.",
-      span: "",
+      title: "Dashboard",
+      body: "Web dashboard tracks paid, pending and overdue. Filter by client or month in one tap.",
     },
     {
       icon: Zap,
       title: "10-second flow",
-      body: "Message to PDF in under 10 seconds, even on 2G.",
-      span: "lg:col-span-2",
+      body: "From message to PDF in under 10 seconds — even on a 2G connection.",
     },
     {
       icon: Shield,
-      title: "Enterprise-grade security",
-      body: "Encrypted at rest, isolated per tenant. Export anytime.",
-      span: "",
+      title: "Your data, safe",
+      body: "Encrypted at rest, isolated per business. Export anytime as CSV or PDF bundle.",
     },
   ];
   return (
-    <section id="features" className="section-padding mx-auto max-w-6xl">
-      <SectionHeader
-        eyebrow="Platform"
-        title="Everything to get paid faster."
-        description="One workspace for invoicing, reminders, and revenue — built for how you already work."
-      />
-      <div className="grid gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
-        {items.map(({ icon: Icon, title, body, span }, index) => (
-          <Reveal key={title} delay={index * 70}>
-            <div
-              className={`card-hover group relative h-full overflow-hidden rounded-2xl border border-border/80 bg-card/60 p-6 shadow-soft backdrop-blur-sm sm:p-7 ${span}`}
-            >
-              <div className="absolute -right-10 -top-10 h-28 w-28 rounded-full bg-primary/5 transition-all duration-500 group-hover:scale-110 group-hover:bg-primary/10" />
-              <div className="relative content-stack">
-                <div className="inline-flex rounded-xl bg-primary/10 p-3 text-primary transition-all duration-300 group-hover:scale-105 group-hover:bg-primary group-hover:text-primary-foreground">
-                  <Icon className="h-5 w-5" />
-                </div>
-                <h3 className="font-display text-lg font-semibold leading-snug">{title}</h3>
-                <p className="text-sm leading-relaxed text-muted-foreground">{body}</p>
-              </div>
+    <section id="features" className="mx-auto max-w-6xl px-5 py-24">
+      <div className="max-w-2xl">
+        <p className="text-sm font-semibold text-primary">Features</p>
+        <h2 className="mt-2 font-display text-4xl font-bold tracking-tight sm:text-5xl">
+          Everything you need.
+          <br />
+          Nothing you don’t.
+        </h2>
+        <p className="mt-4 text-muted-foreground">
+          A pocket-sized billing team that lives inside the app you already use 50 times a day.
+        </p>
+      </div>
+      <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {items.map(({ icon: Icon, title, body }) => (
+          <div
+            key={title}
+            className="group rounded-2xl border border-border bg-card p-6 shadow-soft transition hover:-translate-y-0.5 hover:shadow-glow"
+          >
+            <div className="grid h-10 w-10 place-items-center rounded-xl bg-accent text-accent-foreground transition group-hover:bg-gradient-primary group-hover:text-primary-foreground">
+              <Icon className="h-5 w-5" />
             </div>
-          </Reveal>
+            <h3 className="mt-5 font-display text-lg font-semibold">{title}</h3>
+            <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{body}</p>
+          </div>
         ))}
       </div>
     </section>
@@ -236,88 +233,49 @@ function Features() {
 
 function HowItWorks() {
   const steps = [
-    { n: "01", t: "Send a message", d: "Text BillFlow on WhatsApp like you'd message a teammate." },
-    { n: "02", t: "AI structures it", d: "Client, amount, tax, and service lines parsed in milliseconds." },
-    { n: "03", t: "PDF delivered", d: "Branded invoice generated and shared with your client." },
-    { n: "04", t: "Get paid", d: "Automated reminders until the invoice is closed." },
+    {
+      n: "01",
+      t: "Type a message",
+      d: "Open WhatsApp and message BillFlow like you’d text a friend.",
+    },
+    {
+      n: "02",
+      t: "AI does the math",
+      d: "Client, amount, service and tax are extracted in milliseconds.",
+    },
+    {
+      n: "03",
+      t: "PDF lands back",
+      d: "A branded invoice PDF is generated and sent to your client.",
+    },
+    { n: "04", t: "Get paid faster", d: "Auto-reminders close the loop — no awkward follow-ups." },
   ];
   return (
-    <section id="how" className="border-y border-border/60 bg-card/30">
-      <div className="section-padding mx-auto max-w-6xl">
-        <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between lg:gap-12">
-          <SectionHeader
-            eyebrow="Workflow"
-            title="Four steps. Zero spreadsheets."
-            align="left"
-            className="mb-0 lg:max-w-xl"
-          />
-          <Reveal delay={120}>
-            <Link
-              to="/signup"
-              className="inline-flex items-center gap-1 text-sm font-semibold text-primary transition-colors hover:text-primary/80"
-            >
-              Try it free <ArrowRight className="h-4 w-4" />
-            </Link>
-          </Reveal>
+    <section id="how" className="border-y border-border/60 bg-card/50">
+      <div className="mx-auto max-w-6xl px-5 py-24">
+        <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
+          <div className="max-w-xl">
+            <p className="text-sm font-semibold text-primary">How it works</p>
+            <h2 className="mt-2 font-display text-4xl font-bold tracking-tight sm:text-5xl">
+              From thought to paid invoice — in four taps.
+            </h2>
+          </div>
+          <a
+            href="#cta"
+            className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:underline"
+          >
+            Try the demo flow <ArrowRight className="h-4 w-4" />
+          </a>
         </div>
-        <div className="mt-12 grid gap-5 sm:grid-cols-2 sm:gap-6 lg:mt-16 lg:grid-cols-4">
-          {steps.map((s, index) => (
-            <Reveal key={s.n} delay={index * 90}>
-              <div className="card-hover h-full rounded-2xl border border-border/80 bg-background p-6 shadow-soft sm:p-7">
-                <div className="font-display text-sm font-bold text-primary">{s.n}</div>
-                <h3 className="mt-3 font-display text-lg font-semibold leading-snug">{s.t}</h3>
-                <p className="mt-2.5 text-sm leading-relaxed text-muted-foreground">{s.d}</p>
-              </div>
-            </Reveal>
+        <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+          {steps.map((s) => (
+            <div key={s.n} className="relative rounded-2xl border border-border bg-background p-6">
+              <div className="font-display text-3xl font-bold text-gradient">{s.n}</div>
+              <h3 className="mt-3 font-display text-lg font-semibold">{s.t}</h3>
+              <p className="mt-2 text-sm text-muted-foreground">{s.d}</p>
+            </div>
           ))}
         </div>
-      </div>
-    </section>
-  );
-}
-
-function Testimonials() {
-  const quotes = [
-    {
-      text: "We stopped using Excel for invoices. BillFlow pays for itself in a week.",
-      author: "Priya S.",
-      role: "Studio owner, Bangalore",
-    },
-    {
-      text: "Clients actually pay faster now. The reminders are polite but effective.",
-      author: "Rahul M.",
-      role: "Freelance designer",
-    },
-  ];
-  return (
-    <section className="section-padding mx-auto max-w-6xl">
-      <SectionHeader
-        eyebrow="Customers"
-        title="Loved by founders and freelancers."
-        description="Real stories from teams who replaced manual billing with WhatsApp automation."
-      />
-      <div className="grid gap-6 md:grid-cols-2 md:gap-8">
-        {quotes.map((q, index) => (
-          <Reveal key={q.author} delay={index * 100}>
-            <div className="card-hover h-full rounded-2xl border border-border/80 bg-card/60 p-7 shadow-soft backdrop-blur-sm sm:p-9">
-              <div className="flex gap-0.5 text-chart-5">
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <Star key={i} className="h-4 w-4 fill-current" />
-                ))}
-              </div>
-              <p className="mt-5 text-lg leading-relaxed text-foreground/90">&ldquo;{q.text}&rdquo;</p>
-              <div className="mt-7 flex items-center gap-4">
-                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-primary/10 font-display text-sm font-bold text-primary">
-                  {q.author[0]}
-                </div>
-                <div className="min-w-0">
-                  <p className="truncate text-sm font-semibold">{q.author}</p>
-                  <p className="truncate text-xs text-muted-foreground">{q.role}</p>
-                </div>
-              </div>
-            </div>
-          </Reveal>
-        ))}
       </div>
     </section>
   );
@@ -328,89 +286,96 @@ function Pricing() {
     {
       name: "Starter",
       price: "Free",
-      note: "14-day trial",
-      features: ["10 invoices / mo", "WhatsApp integration", "PDF generation", "Email support"],
+      note: "for 14 days",
+      features: ["Up to 10 invoices", "WhatsApp integration", "PDF generation", "Email support"],
       cta: "Start free",
       highlight: false,
     },
     {
       name: "Pro",
       price: "₹499",
-      note: "/ month",
+      note: "per month",
       features: [
         "Unlimited invoices",
         "Auto reminders",
-        "Custom branding",
+        "Branded PDFs",
         "GST support",
         "Priority support",
       ],
-      cta: "Start Pro trial",
+      cta: "Go Pro",
       highlight: true,
     },
     {
       name: "Business",
       price: "₹999",
-      note: "/ month",
+      note: "per month",
       features: [
         "Everything in Pro",
-        "Multi-user seats",
-        "Analytics & API",
-        "Dedicated onboarding",
-        "SLA support",
+        "Multi-user access",
+        "Analytics dashboard",
+        "Custom branding",
+        "API access",
       ],
-      cta: "Contact sales",
+      cta: "Talk to us",
       highlight: false,
     },
   ];
   return (
-    <section id="pricing" className="section-padding mx-auto max-w-6xl">
-      <SectionHeader
-        eyebrow="Pricing"
-        title="Simple plans. No surprises."
-        description="Start free. Upgrade when you're ready to scale."
-      />
-      <div className="flex flex-col gap-6 lg:grid lg:grid-cols-3 lg:gap-8">
-        {plans.map((p, index) => (
-          <Reveal key={p.name} delay={index * 100}>
-            <div
-              className={`card-hover relative flex h-full flex-col rounded-2xl border p-7 transition sm:p-8 ${
-                p.highlight
-                  ? "border-primary bg-card shadow-glow lg:-mt-3 lg:mb-3 lg:py-11"
-                  : "border-border/80 bg-card/60 shadow-soft"
-              }`}
-            >
+    <section id="pricing" className="mx-auto max-w-6xl px-5 py-24">
+      <div className="mx-auto max-w-2xl text-center">
+        <p className="text-sm font-semibold text-primary">Pricing</p>
+        <h2 className="mt-2 font-display text-4xl font-bold tracking-tight sm:text-5xl">
+          Pay less than your chai budget.
+        </h2>
+        <p className="mt-4 text-muted-foreground">
+          Simple, transparent plans. Upgrade or cancel anytime.
+        </p>
+      </div>
+      <div className="mt-12 grid gap-5 lg:grid-cols-3">
+        {plans.map((p) => (
+          <div
+            key={p.name}
+            className={`rounded-3xl border p-7 ${p.highlight ? "border-primary bg-gradient-primary text-primary-foreground shadow-glow" : "border-border bg-card shadow-soft"}`}
+          >
+            <div className="flex items-center justify-between">
+              <h3 className="font-display text-xl font-semibold">{p.name}</h3>
               {p.highlight && (
-                <span className="absolute -top-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-primary px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-primary-foreground">
-                  Most popular
+                <span className="rounded-full bg-primary-foreground/15 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider">
+                  Most loved
                 </span>
               )}
-              <div className="content-stack">
-                <h3 className="font-display text-lg font-semibold">{p.name}</h3>
-                <div className="flex flex-wrap items-baseline gap-1.5">
-                  <span className="font-display text-3xl font-bold tracking-tight sm:text-4xl">
-                    {p.price}
-                  </span>
-                  <span className="text-sm text-muted-foreground">{p.note}</span>
-                </div>
-              </div>
-              <ul className="mt-8 flex-1 space-y-3 text-sm text-foreground/85">
-                {p.features.map((f) => (
-                  <li key={f} className="flex items-start gap-3">
-                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
-                    {f}
-                  </li>
-                ))}
-              </ul>
-              <Link to="/signup" className="mt-8 block">
-                <Button
-                  className={`h-11 w-full rounded-lg transition-transform duration-300 hover:scale-[1.02] active:scale-[0.98] ${p.highlight ? "shadow-glow" : ""}`}
-                  variant={p.highlight ? "default" : "outline"}
-                >
-                  {p.cta}
-                </Button>
-              </Link>
             </div>
-          </Reveal>
+            <div className="mt-5 flex items-baseline gap-2">
+              <span className="font-display text-5xl font-bold tracking-tight">{p.price}</span>
+              <span
+                className={
+                  p.highlight
+                    ? "text-primary-foreground/80 text-sm"
+                    : "text-muted-foreground text-sm"
+                }
+              >
+                {p.note}
+              </span>
+            </div>
+            <ul
+              className={`mt-6 space-y-3 text-sm ${p.highlight ? "text-primary-foreground/90" : "text-foreground/80"}`}
+            >
+              {p.features.map((f) => (
+                <li key={f} className="flex items-start gap-2">
+                  <Check
+                    className={`mt-0.5 h-4 w-4 ${p.highlight ? "text-primary-foreground" : "text-primary"}`}
+                  />
+                  {f}
+                </li>
+              ))}
+            </ul>
+            <a
+              href="#cta"
+              className={`mt-8 inline-flex w-full items-center justify-center gap-1.5 rounded-full px-5 py-3 text-sm font-semibold transition ${p.highlight ? "bg-background text-foreground hover:opacity-90" : "bg-foreground text-background hover:opacity-90"}`}
+            >
+              {p.cta} <ArrowRight className="h-4 w-4" />
+            </a>
+          </div>
         ))}
       </div>
     </section>
@@ -419,58 +384,61 @@ function Pricing() {
 
 function CTA() {
   return (
-    <section id="cta" className="mx-auto max-w-6xl px-4 pb-20 sm:px-5 sm:pb-28">
-      <Reveal>
-        <div className="relative overflow-hidden rounded-2xl border border-primary/20 bg-gradient-primary p-8 shadow-glow sm:rounded-3xl sm:p-12 md:p-16">
-          <div className="glow-pulse pointer-events-none absolute -right-24 -top-24 h-64 w-64 rounded-full bg-primary-foreground/10 blur-3xl sm:h-80 sm:w-80" />
-          <div className="pointer-events-none absolute -bottom-24 -left-24 h-64 w-64 rounded-full bg-chart-2/20 blur-3xl" />
-          <div className="relative mx-auto max-w-2xl text-center content-stack">
-            <h2 className="font-display text-2xl font-bold tracking-tight text-primary-foreground sm:text-3xl md:text-4xl">
-              Ready to automate your invoicing?
-            </h2>
-            <p className="text-sm text-primary-foreground/85 sm:text-base">
-              Join thousands of businesses billing through WhatsApp. Setup takes under 2 minutes.
-            </p>
-            <form className="mx-auto mt-2 flex w-full max-w-md flex-col gap-3 sm:flex-row sm:mt-4">
-              <input
-                type="tel"
-                placeholder="+91 WhatsApp number"
-                className="h-12 min-h-[48px] flex-1 rounded-lg border-0 bg-primary-foreground/95 px-4 text-base text-foreground placeholder:text-muted-foreground outline-none transition-shadow duration-300 focus:ring-2 focus:ring-primary-foreground sm:h-11 sm:text-sm"
-              />
-              <Button
-                type="button"
-                className="h-12 min-h-[48px] rounded-lg bg-foreground px-6 text-base text-background transition-transform duration-300 hover:scale-[1.02] active:scale-[0.98] sm:h-11 sm:text-sm"
-              >
-                Get started
-              </Button>
-            </form>
-            <p className="text-[11px] text-primary-foreground/70 sm:text-xs">
-              No credit card · 14-day free trial · Cancel anytime
-            </p>
-          </div>
+    <section id="cta" className="mx-auto max-w-6xl px-5 pb-24">
+      <div className="relative overflow-hidden rounded-3xl bg-gradient-primary p-10 text-primary-foreground shadow-glow md:p-16">
+        <div className="absolute -right-20 -top-20 h-72 w-72 rounded-full bg-primary-foreground/10 blur-3xl" />
+        <div className="relative max-w-2xl">
+          <h2 className="font-display text-4xl font-bold tracking-tight sm:text-5xl">
+            Stop typing invoices. Start sending them.
+          </h2>
+          <p className="mt-4 text-primary-foreground/85">
+            Join thousands of small businesses turning WhatsApp into their billing assistant. Setup
+            in under 2 minutes.
+          </p>
+          <form className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <input
+              type="tel"
+              placeholder="Your WhatsApp number"
+              className="w-full rounded-full bg-background/95 px-5 py-3 text-sm text-foreground placeholder:text-muted-foreground outline-none focus:ring-2 focus:ring-background"
+            />
+            <button
+              type="button"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-foreground px-6 py-3 text-sm font-semibold text-background hover:opacity-90 transition"
+            >
+              Get my AI assistant <ArrowRight className="h-4 w-4" />
+            </button>
+          </form>
+          <p className="mt-3 text-xs text-primary-foreground/70">
+            No credit card. Free for 14 days. Cancel anytime.
+          </p>
         </div>
-      </Reveal>
+      </div>
     </section>
   );
 }
 
 function Footer() {
   return (
-    <footer className="border-t border-border/60 bg-card/30 safe-bottom">
-      <div className="mx-auto flex max-w-6xl flex-col items-center gap-8 px-4 py-10 text-center sm:flex-row sm:justify-between sm:px-5 sm:py-12 sm:text-left">
-        <Logo />
-        <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-muted-foreground">
-          <a href="#" className="transition-colors duration-200 hover:text-foreground">
+    <footer className="border-t border-border/60">
+      <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-5 py-8 text-sm text-muted-foreground sm:flex-row">
+        <div className="flex items-center gap-2">
+          <div className="grid h-6 w-6 place-items-center rounded-md bg-gradient-primary text-primary-foreground">
+            <Sparkles className="h-3 w-3" />
+          </div>
+          <span className="font-medium text-foreground">BillFlow AI</span>
+          <span>· © {new Date().getFullYear()}</span>
+        </div>
+        <div className="flex items-center gap-5">
+          <a href="#" className="hover:text-foreground transition">
             Privacy
           </a>
-          <a href="#" className="transition-colors duration-200 hover:text-foreground">
+          <a href="#" className="hover:text-foreground transition">
             Terms
           </a>
-          <a href="#" className="transition-colors duration-200 hover:text-foreground">
+          <a href="#" className="hover:text-foreground transition">
             Contact
           </a>
         </div>
-        <p className="text-xs text-muted-foreground">© {new Date().getFullYear()} BillFlow AI</p>
       </div>
     </footer>
   );
