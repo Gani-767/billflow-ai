@@ -83,7 +83,7 @@ function Hero() {
           >
             Message{" "}
             <span className="inline-block max-w-full break-words rounded-md bg-muted px-1.5 py-0.5 font-mono text-xs text-foreground sm:text-sm">
-              Invoice Ravi ₹5000 Logo
+              Invoice Ravi ₹ogo
             </span>{" "}
             — BillFlow creates the PDF, sends it to your client, and chases payment automatically.
           </p>
