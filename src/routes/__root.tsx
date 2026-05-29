@@ -76,14 +76,21 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         name: "viewport",
         content: "width=device-width, initial-scale=1, viewport-fit=cover",
       },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "BillFlow AI" },
+      {
+        name: "description",
+        content:
+          "AI-powered invoice automation for small businesses. Create GST-ready invoices on WhatsApp in seconds.",
+      },
+      { name: "author", content: "BillFlow AI" },
+      { property: "og:title", content: "BillFlow AI — Invoices on WhatsApp" },
+      {
+        property: "og:description",
+        content:
+          "Send a WhatsApp message, get a professional invoice PDF, and auto-remind clients to pay.",
+      },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [
       { rel: "preconnect", href: "https://fonts.googleapis.com" },

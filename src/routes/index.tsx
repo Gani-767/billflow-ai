@@ -50,14 +50,14 @@ function Nav() {
   return (
     <header className="sticky top-0 z-40 border-b border-border/60 bg-background/80 backdrop-blur">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5">
-        <a href="#" className="flex items-center gap-2">
+        <Link to="/" className="flex items-center gap-2">
           <div className="grid h-8 w-8 place-items-center rounded-lg bg-gradient-primary text-primary-foreground shadow-soft">
             <Sparkles className="h-4 w-4" />
           </div>
           <span className="font-display text-lg font-bold tracking-tight">
             BillFlow<span className="text-primary">.ai</span>
           </span>
-        </a>
+        </Link>
         <nav className="hidden md:flex items-center gap-7 text-sm text-muted-foreground">
           <a href="#features" className="hover:text-foreground transition">
             Features
@@ -109,12 +109,12 @@ function Hero() {
             them to pay.
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-3">
-            <a
-              href="#cta"
+            <Link
+              to="/signup"
               className="inline-flex items-center gap-2 rounded-full bg-gradient-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-glow hover:opacity-95 transition"
             >
               Start free — no card needed <ArrowRight className="h-4 w-4" />
-            </a>
+            </Link>
             <a
               href="#how"
               className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-5 py-3 text-sm font-medium text-foreground hover:bg-muted transition"
@@ -368,12 +368,12 @@ function Pricing() {
                 </li>
               ))}
             </ul>
-            <a
-              href="#cta"
+            <Link
+              to="/signup"
               className={`mt-8 inline-flex w-full items-center justify-center gap-1.5 rounded-full px-5 py-3 text-sm font-semibold transition ${p.highlight ? "bg-background text-foreground hover:opacity-90" : "bg-foreground text-background hover:opacity-90"}`}
             >
               {p.cta} <ArrowRight className="h-4 w-4" />
-            </a>
+            </Link>
           </div>
         ))}
       </div>
@@ -400,12 +400,12 @@ function CTA() {
               placeholder="Your WhatsApp number"
               className="w-full rounded-full bg-background/95 px-5 py-3 text-sm text-foreground placeholder:text-muted-foreground outline-none focus:ring-2 focus:ring-background"
             />
-            <button
-              type="button"
+            <Link
+              to="/signup"
               className="inline-flex items-center justify-center gap-2 rounded-full bg-foreground px-6 py-3 text-sm font-semibold text-background hover:opacity-90 transition"
             >
               Get my AI assistant <ArrowRight className="h-4 w-4" />
-            </button>
+            </Link>
           </form>
           <p className="mt-3 text-xs text-primary-foreground/70">
             No credit card. Free for 14 days. Cancel anytime.
@@ -428,13 +428,13 @@ function Footer() {
           <span>· © {new Date().getFullYear()}</span>
         </div>
         <div className="flex items-center gap-5">
-          <a href="#" className="hover:text-foreground transition">
-            Privacy
-          </a>
-          <a href="#" className="hover:text-foreground transition">
-            Terms
-          </a>
-          <a href="#" className="hover:text-foreground transition">
+          <Link to="/signup" className="hover:text-foreground transition">
+            Get started
+          </Link>
+          <Link to="/login" className="hover:text-foreground transition">
+            Sign in
+          </Link>
+          <a href="mailto:hello@billflow.ai" className="hover:text-foreground transition">
             Contact
           </a>
         </div>
